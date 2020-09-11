@@ -1,0 +1,35 @@
+--- 
+- 
+    hosts: apacheservers
+      sudo: true
+        tasks: 
+            - 
+                    import_role: 
+                            name: apache
+                                - 
+                                        include_role: 
+                                                name: apache
+                                                    - 
+                                                            debug: 
+                                                                    msg: "apache role's tasks completed"
+                                                    - 
+                                                        hosts: nginxservers
+                                                          sudo: true
+                                                            tasks: 
+                                                                - 
+                                                                        import_role: 
+                                                                                name: nginx
+                                                                                    - 
+                                                                                            include_role: 
+                                                                                                    name: nginx
+                                                                                                        - 
+                                                                                                                debug: 
+                                                                                                                        msg: "nginx role's tasks completed"
+                                                                                                        - 
+                                                                                                            hosts: apacheservers
+                                                                                                              sudo: true
+                                                                                                                tasks: 
+                                                                                                                    - 
+                                                                                                                            apt: "name=default-jdk state=latest"
+                                                                                                                                  name: "Install Java"
+

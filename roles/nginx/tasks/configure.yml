@@ -1,0 +1,8 @@
+---
+- name: nginx.conf file
+  copy: src=nginx.conf dest=/etc/nginx/
+  notify:
+  - restart nginx service
+
+- name: send index.html file
+  copy: src=index.html dest=/home/ubuntu/  
